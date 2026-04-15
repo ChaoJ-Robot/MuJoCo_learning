@@ -1,2 +1,3 @@
 [console_scripts]
 gen3_robot_node = gen3_robot.gen3_robot_node:main
+trajectory_publisher = gen3_robot.trajectory_publisher:main

@@ -1,1 +1,1 @@
-# gen3_robot package
+from .gen3_controller import Gen3MujocoController

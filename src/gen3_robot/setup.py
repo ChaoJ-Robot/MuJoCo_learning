@@ -8,9 +8,9 @@ package_name = 'gen3_robot'
 if '--editable' in sys.argv:
     sys.argv.remove('--editable')
 
-# 安装 resource/models 下所有文件
+# 安装 models/ 下所有文件
 model_files = []
-for root, dirs, files in os.walk('resource/models'):
+for root, dirs, files in os.walk('models'):
     for file in files:
         src = os.path.join(root, file)
         dst = os.path.join('share', package_name, root)
@@ -35,6 +35,7 @@ setup(
     entry_points={
         'console_scripts': [
             'gen3_robot_node = gen3_robot.gen3_robot_node:main',
+            'trajectory_publisher = gen3_robot.trajectory_publisher:main',
         ],
     },
 )
