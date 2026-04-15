@@ -1,0 +1,51 @@
+[0.665s] Invoking command in '/home/jack/Desktop/mujoco/mujoco_demo/src/gen3_robot': PYTHONPATH=/home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/gen3_robot build --build-base /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build install --record /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/install.log --single-version-externally-managed install_data
+[0.933s] running egg_info
+[0.953s] writing ../../build/gen3_robot/gen3_robot.egg-info/PKG-INFO
+[0.953s] writing dependency_links to ../../build/gen3_robot/gen3_robot.egg-info/dependency_links.txt
+[0.953s] writing entry points to ../../build/gen3_robot/gen3_robot.egg-info/entry_points.txt
+[0.954s] writing requirements to ../../build/gen3_robot/gen3_robot.egg-info/requires.txt
+[0.954s] writing top-level names to ../../build/gen3_robot/gen3_robot.egg-info/top_level.txt
+[0.998s] reading manifest file '../../build/gen3_robot/gen3_robot.egg-info/SOURCES.txt'
+[1.000s] writing manifest file '../../build/gen3_robot/gen3_robot.egg-info/SOURCES.txt'
+[1.000s] running build
+[1.000s] running build_py
+[1.000s] copying gen3_robot/base_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[1.001s] copying gen3_robot/trajectory_publisher.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[1.001s] copying gen3_robot/__init__.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[1.001s] copying gen3_robot/gen3_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[1.001s] copying gen3_robot/gen3_robot_core.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[1.001s] copying gen3_robot/gen3_robot_node.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[1.002s] running install
+[1.005s] running install_lib
+[1.026s] copying /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot/gen3_robot_node.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot
+[1.027s] byte-compiling /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot/gen3_robot_node.py to gen3_robot_node.cpython-310.pyc
+[1.030s] running install_data
+[1.030s] copying resource/gen3_robot -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/ament_index/resource_index/packages
+[1.030s] copying package.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot
+[1.030s] copying launch/gen3_robot.launch.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/launch
+[1.031s] copying config/gen3_controller.yaml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/config
+[1.031s] copying resource/models/kinova_gen3/CHANGELOG.md -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.031s] copying resource/models/kinova_gen3/gen3.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.031s] copying resource/models/kinova_gen3/base_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.032s] copying resource/models/kinova_gen3/gen3_robot.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.032s] copying resource/models/kinova_gen3/gen3.png -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.034s] copying resource/models/kinova_gen3/demo.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.034s] copying resource/models/kinova_gen3/LICENSE -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.035s] copying resource/models/kinova_gen3/scene.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.035s] copying resource/models/kinova_gen3/README.md -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3
+[1.035s] copying resource/models/kinova_gen3/assets/spherical_wrist_2_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.036s] copying resource/models/kinova_gen3/assets/forearm_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.037s] copying resource/models/kinova_gen3/assets/shoulder_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.038s] copying resource/models/kinova_gen3/assets/base_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.038s] copying resource/models/kinova_gen3/assets/half_arm_1_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.039s] copying resource/models/kinova_gen3/assets/bracelet_with_vision_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.041s] copying resource/models/kinova_gen3/assets/spherical_wrist_1_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.042s] copying resource/models/kinova_gen3/assets/bracelet_no_vision_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.045s] copying resource/models/kinova_gen3/assets/half_arm_2_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/resource/models/kinova_gen3/assets
+[1.046s] running install_egg_info
+[1.068s] removing '/home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot-0.0.0-py3.10.egg-info' (and everything under it)
+[1.069s] Copying ../../build/gen3_robot/gen3_robot.egg-info to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot-0.0.0-py3.10.egg-info
+[1.069s] running install_scripts
+[1.112s] Installing gen3_robot_node script to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/gen3_robot
+[1.113s] writing list of installed files to '/home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/install.log'
+[1.138s] Invoked command in '/home/jack/Desktop/mujoco/mujoco_demo/src/gen3_robot' returned '0': PYTHONPATH=/home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/gen3_robot build --build-base /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build install --record /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/install.log --single-version-externally-managed install_data

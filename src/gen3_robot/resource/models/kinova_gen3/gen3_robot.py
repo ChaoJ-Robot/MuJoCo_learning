@@ -2,7 +2,7 @@ import mujoco
 import time
 import mujoco.viewer
 import numpy as np
-from base_controller import BaseController
+from gen3_robot.gen3_robot.base_controller import BaseController
 
 import matplotlib.pyplot as plt
 
