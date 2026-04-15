@@ -14,7 +14,7 @@ from std_msgs.msg import Float64MultiArray
 
 from .gen3_controller import Gen3MujocoController
 
-
+ 
 def rotation_matrix_to_quaternion(R: np.ndarray):
     R = np.asarray(R, dtype=float).reshape(3, 3)
     trace = np.trace(R)

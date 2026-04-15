@@ -1,11 +1,13 @@
+#!/usr/bin/env python3
+
 import os
-import math
 import threading
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 import mujoco
 import mujoco.viewer
 import numpy as np
+import math
 
 from .base_controller import BaseController
 
@@ -26,6 +28,7 @@ class Gen3MujocoController(BaseController):
         self.site_id = mujoco.mj_name2id(
             self.model, mujoco.mjtObj.mjOBJ_SITE, self.site_name
         )
+
         if self.site_id == -1:
             raise ValueError(f"未找到末端 site: {self.site_name}")
 
@@ -43,27 +46,13 @@ class Gen3MujocoController(BaseController):
         self.set_up()
 
     def set_up(self, **kwargs: Any) -> None:
-        initial_qpos = kwargs.get("initial_qpos", None)
+        initial_qpos = [0.0, 0.0, 0.0, -math.pi / 2, 0.0, math.pi / 2, 0.0]
 
-        with self.lock:
-            if initial_qpos is None:
-                if self.key_id != -1:
-                    mujoco.mj_resetDataKeyframe(self.model, self.data, self.key_id)
-                else:
-                    self.data.qpos[:self.ndof] = 0.0
-                    self.data.qvel[:self.ndof] = 0.0
-                    if self.model.nu >= self.ndof:
-                        self.data.ctrl[:self.ndof] = self.data.qpos[:self.ndof]
-            else:
-                q = np.asarray(initial_qpos, dtype=float)
-                if q.shape != (self.ndof,):
-                    raise ValueError("initial_qpos 必须是长度为7的数组")
-                self.data.qpos[:self.ndof] = q
-                self.data.qvel[:self.ndof] = 0.0
-                if self.model.nu >= self.ndof:
-                    self.data.ctrl[:self.ndof] = q
+        self.data.qpos[:self.ndof] = initial_qpos
+        self.data.ctrl[:self.ndof] = initial_qpos
 
-            mujoco.mj_forward(self.model, self.data)
+        mujoco.mj_forward(self.model, self.data)
+        print("初始位置设置完成: qpos =", self.data.qpos[:self.ndof])
 
     def reset(self):
         self.set_up()
@@ -72,7 +61,6 @@ class Gen3MujocoController(BaseController):
         with self.lock:
             ee_pos = self.data.site_xpos[self.site_id].copy()
             ee_rot = self.data.site_xmat[self.site_id].reshape(3, 3).copy()
-
             return {
                 "time": float(self.data.time),
                 "qpos": self.data.qpos[:self.ndof].copy(),
@@ -84,6 +72,7 @@ class Gen3MujocoController(BaseController):
 
     def get_eef_state(self):
         state = self.get_state()
+        print(f"当前末端位置: {state['ee_pos']}, {state['ee_rot']}")
         return state["ee_pos"], state["ee_rot"]
 
     def set_action(self, action, **kwargs: Any) -> None:
@@ -95,18 +84,8 @@ class Gen3MujocoController(BaseController):
             raise ValueError("q_target 必须是长度为7的数组")
 
         with self.lock:
-            if self.model.nu <= 0:
-                raise RuntimeError("模型没有 actuator，无法写入 ctrl")
-
             nctrl = min(self.ndof, self.model.nu)
-            ctrl = q_target.copy()
-
-            for i in range(nctrl):
-                if self.model.actuator_ctrllimited[i]:
-                    low, high = self.model.actuator_ctrlrange[i]
-                    ctrl[i] = np.clip(ctrl[i], low, high)
-
-            self.data.ctrl[:nctrl] = ctrl[:nctrl]
+            self.data.ctrl[:nctrl] = q_target[:nctrl]
 
     def compute_pose_error(self, pos_des, rot_des=None):
         pos_cur, rot_cur = self.get_eef_state()
@@ -130,9 +109,6 @@ class Gen3MujocoController(BaseController):
             jacr = np.zeros((3, self.model.nv))
             mujoco.mj_jacSite(self.model, self.data, jacp, jacr, self.site_id)
             return jacp[:, :self.ndof], jacr[:, :self.ndof]
-
-    def set_eef_action(self, pos_des, rot_des=None):
-        self.set_ee_pose(pos_des, rot_des)
 
     def set_ee_pose(self, pos_des, rot_des=None):
         e_pos, e_rot = self.compute_pose_error(pos_des, rot_des)
@@ -160,7 +136,6 @@ class Gen3MujocoController(BaseController):
 
     def launch_viewer(self):
         self.viewer = mujoco.viewer.launch_passive(self.model, self.data)
-        return self.viewer
 
     def sync_viewer(self):
         if self.viewer is not None and self.viewer.is_running():

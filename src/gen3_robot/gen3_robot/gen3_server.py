@@ -10,11 +10,11 @@ from rclpy.node import Node
 from ament_index_python.packages import get_package_share_directory
 from geometry_msgs.msg import PoseStamped, Point, Quaternion
 from sensor_msgs.msg import JointState
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64MultiArray, String
 
 from .gen3_controller import Gen3MujocoController
 
- 
+
 def rotation_matrix_to_quaternion(R: np.ndarray):
     R = np.asarray(R, dtype=float).reshape(3, 3)
     trace = np.trace(R)
@@ -47,9 +47,9 @@ def rotation_matrix_to_quaternion(R: np.ndarray):
     return np.array([x, y, z, w], dtype=float)
 
 
-class Gen3RobotNode(Node):
+class Gen3Server(Node):
     def __init__(self):
-        super().__init__("gen3_robot_node")
+        super().__init__("gen3_server")
 
         pkg_share = get_package_share_directory("gen3_robot")
         default_model_xml = os.path.join(
@@ -63,69 +63,73 @@ class Gen3RobotNode(Node):
 
         model_xml_path = self.get_parameter("model_xml_path").value
         publish_rate = float(self.get_parameter("publish_rate").value)
-        enable_viewer = bool(self.get_parameter("enable_viewer").value)
+        self.enable_viewer = bool(self.get_parameter("enable_viewer").value)
         site_name = self.get_parameter("site_name").value
 
-        self.controller = Gen3MujocoController(
-            model_xml_path=model_xml_path,
-            site_name=site_name,
-        )
-        self.enable_viewer = enable_viewer
+        self.controller = Gen3MujocoController(model_xml_path, site_name)
 
         if self.enable_viewer:
-            self.get_logger().info("正在启动 MuJoCo viewer...")
             self.controller.launch_viewer()
-            self.get_logger().info("MuJoCo viewer 已启动")
 
         self.joint_state_pub = self.create_publisher(JointState, "joint_states", 10)
         self.ee_pose_pub = self.create_publisher(PoseStamped, "ee_pose", 10)
 
-        self.joint_target_sub = self.create_subscription(
-            Float64MultiArray,
-            "joint_target",
-            self.joint_target_callback,
-            10,
-        )
+        self.create_subscription(Float64MultiArray, "joint_target", self.joint_target_callback, 10)
+        self.create_subscription(PoseStamped, "ee_pose_target", self.ee_pose_target_callback, 10)
+        self.create_subscription(String, "robot_command", self.robot_command_callback, 10)
 
-        self.ee_pose_target_sub = self.create_subscription(
-            PoseStamped,
-            "ee_pose_target",
-            self.ee_pose_target_callback,
-            10,
-        )
+        self.timer = self.create_timer(1.0 / publish_rate, self.timer_callback)
 
-        period = 1.0 / publish_rate if publish_rate > 0.0 else 0.01
-        self.timer = self.create_timer(period, self.timer_callback)
+        self.get_logger().info("Gen3 server 已启动")
 
-        self.get_logger().info("Gen3 Mujoco ROS2 节点启动成功")
-        self.get_logger().info(f"模型路径: {model_xml_path}")
-
-    def joint_target_callback(self, msg: Float64MultiArray):
+    def joint_target_callback(self, msg):
         try:
-            if len(msg.data) != 7:
-                self.get_logger().warn("joint_target 必须是长度为7的数组")
-                return
-            self.controller.set_joint_target(list(msg.data))
+            if len(msg.data) == 7:
+                self.joint_target = np.array(msg.data, dtype=float)
+                self.control_mode = "joint"
+                self.get_logger().info(
+                    f"已接收关节目标: {self.joint_target.tolist()}"
+                )
+            else:
+                self.get_logger().warn("joint_target 长度必须为7")
         except Exception as e:
-            self.get_logger().error(f"设置关节目标失败: {e}")
+            self.get_logger().error(f"joint_target 失败: {e}")
 
-    def ee_pose_target_callback(self, msg: PoseStamped):
+    def ee_pose_target_callback(self, msg):
         try:
-            pos_des = np.array(
-                [
-                    msg.pose.position.x,
-                    msg.pose.position.y,
-                    msg.pose.position.z,
-                ],
-                dtype=float,
+            self.ee_target = np.array([
+                msg.pose.position.x,
+                msg.pose.position.y,
+                msg.pose.position.z
+            ], dtype=float)
+            self.control_mode = "ee"
+            self.get_logger().info(
+                f"已接收末端目标: {self.ee_target.tolist()}"
             )
-            self.controller.set_ee_pose(pos_des, rot_des=None)
         except Exception as e:
-            self.get_logger().error(f"设置末端目标失败: {e}")
+            self.get_logger().error(f"ee_pose_target 失败: {e}")
+
+    def robot_command_callback(self, msg):
+        cmd = msg.data.strip().lower()
+
+        if cmd == "home":
+            self.ee_target = None
+            self.joint_target = None
+            self.control_mode = "idle"
+            self.controller.reset()
+            self.get_logger().info("执行 home/reset")
+
+        elif cmd == "stop":
+            self.ee_target = None
+            self.joint_target = None
+            self.control_mode = "idle"
+            self.get_logger().info("停止当前目标跟踪")
+
+        else:
+            self.get_logger().warn(f"未知命令: {cmd}")
 
     def publish_joint_state(self):
         state = self.controller.get_state()
-
         msg = JointState()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.name = [
@@ -144,28 +148,29 @@ class Gen3RobotNode(Node):
         msg = PoseStamped()
         msg.header.stamp = self.get_clock().now().to_msg()
         msg.header.frame_id = "base_link"
-        msg.pose.position = Point(
-            x=float(ee_pos[0]),
-            y=float(ee_pos[1]),
-            z=float(ee_pos[2]),
-        )
+        msg.pose.position = Point(x=float(ee_pos[0]), y=float(ee_pos[1]), z=float(ee_pos[2]))
         msg.pose.orientation = Quaternion(
-            x=float(quat[0]),
-            y=float(quat[1]),
-            z=float(quat[2]),
-            w=float(quat[3]),
+            x=float(quat[0]), y=float(quat[1]), z=float(quat[2]), w=float(quat[3])
         )
         self.ee_pose_pub.publish(msg)
 
     def timer_callback(self):
         try:
+            if self.control_mode == "ee" and self.ee_target is not None:
+                self.controller.set_ee_pose(self.ee_target)
+
+            elif self.control_mode == "joint" and self.joint_target is not None:
+                self.controller.set_joint_target(self.joint_target)
+
             self.controller.step()
             self.publish_joint_state()
             self.publish_ee_pose()
+
             if self.enable_viewer:
                 self.controller.sync_viewer()
+
         except Exception as e:
-            self.get_logger().error(f"定时器执行失败: {e}")
+            self.get_logger().error(f"timer_callback 失败: {e}")
 
     def destroy_node(self):
         try:
@@ -178,26 +183,20 @@ class Gen3RobotNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = None
-
     try:
-        node = Gen3RobotNode()
+        node = Gen3Server()
         rclpy.spin(node)
     except KeyboardInterrupt:
         pass
     finally:
         if node is not None:
-            try:
-                node.destroy_node()
-            except Exception:
-                pass
-        try:
-            if rclpy.ok():
-                rclpy.shutdown()
-        except Exception:
-            pass
+            node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == "__main__":
     main()
 
-
+        
+    

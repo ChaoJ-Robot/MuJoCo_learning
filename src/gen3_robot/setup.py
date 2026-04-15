@@ -8,7 +8,6 @@ package_name = 'gen3_robot'
 if '--editable' in sys.argv:
     sys.argv.remove('--editable')
 
-# 安装 models/ 下所有文件
 model_files = []
 for root, dirs, files in os.walk('models'):
     for file in files:
@@ -21,7 +20,6 @@ setup(
     version='0.0.0',
     packages=find_packages(exclude=['test']),
     data_files=[
-        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/' + package_name + '/launch', glob('launch/*.launch.py')),
         ('share/' + package_name + '/config', glob('config/*.yaml')),
@@ -34,8 +32,9 @@ setup(
     license='TODO: License declaration',
     entry_points={
         'console_scripts': [
-            'gen3_robot_node = gen3_robot.gen3_robot_node:main',
-            'trajectory_publisher = gen3_robot.trajectory_publisher:main',
+            'gen3_server = gen3_robot.gen3_server:main',
+            'command_sender = gen3_robot.command_sender:main',
+            'circle_sender = gen3_robot.circle_sender:main',
         ],
     },
 )

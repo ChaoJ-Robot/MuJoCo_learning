@@ -1,3 +1,4 @@
 [console_scripts]
-gen3_robot_node = gen3_robot.gen3_robot_node:main
-trajectory_publisher = gen3_robot.trajectory_publisher:main
+circle_sender = gen3_robot.circle_sender:main
+command_sender = gen3_robot.command_sender:main
+gen3_server = gen3_robot.gen3_server:main

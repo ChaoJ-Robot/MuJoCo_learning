@@ -1,0 +1,24 @@
+[0.611s] Invoking command in '/home/jack/Desktop/mujoco/mujoco_demo/src/gen3_robot': PYTHONPATH=/home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/gen3_robot build --build-base /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build install --record /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/install.log --single-version-externally-managed install_data
+[0.861s] running egg_info
+[0.879s] writing ../../build/gen3_robot/gen3_robot.egg-info/PKG-INFO
+[0.880s] writing dependency_links to ../../build/gen3_robot/gen3_robot.egg-info/dependency_links.txt
+[0.880s] writing entry points to ../../build/gen3_robot/gen3_robot.egg-info/entry_points.txt
+[0.880s] writing requirements to ../../build/gen3_robot/gen3_robot.egg-info/requires.txt
+[0.881s] writing top-level names to ../../build/gen3_robot/gen3_robot.egg-info/top_level.txt
+[0.920s] reading manifest file '../../build/gen3_robot/gen3_robot.egg-info/SOURCES.txt'
+[0.921s] writing manifest file '../../build/gen3_robot/gen3_robot.egg-info/SOURCES.txt'
+[0.922s] running build
+[0.922s] running build_py
+[0.922s] copying gen3_robot/circle_sender.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[0.922s] copying gen3_robot/command_sender.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[0.922s] copying gen3_robot/base_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[0.922s] copying gen3_robot/__init__.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[0.923s] copying gen3_robot/gen3_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[0.923s] copying gen3_robot/gen3_server.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+[0.923s] running install
+[0.926s] running install_lib
+[0.946s] copying /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot/gen3_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot
+[0.947s] byte-compiling /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot/gen3_controller.py to gen3_controller.cpython-310.pyc
+[0.949s] running install_data
+[0.949s] error: can't copy 'resource/gen3_robot': doesn't exist or not a regular file
+[0.967s] Invoked command in '/home/jack/Desktop/mujoco/mujoco_demo/src/gen3_robot' returned '1': PYTHONPATH=/home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/gen3_robot build --build-base /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build install --record /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/install.log --single-version-externally-managed install_data
