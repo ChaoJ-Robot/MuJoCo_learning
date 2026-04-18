@@ -1,0 +1,76 @@
+running egg_info
+writing ../../build/gen3_robot/gen3_robot.egg-info/PKG-INFO
+writing dependency_links to ../../build/gen3_robot/gen3_robot.egg-info/dependency_links.txt
+writing entry points to ../../build/gen3_robot/gen3_robot.egg-info/entry_points.txt
+writing requirements to ../../build/gen3_robot/gen3_robot.egg-info/requires.txt
+writing top-level names to ../../build/gen3_robot/gen3_robot.egg-info/top_level.txt
+reading manifest file '../../build/gen3_robot/gen3_robot.egg-info/SOURCES.txt'
+writing manifest file '../../build/gen3_robot/gen3_robot.egg-info/SOURCES.txt'
+running build
+running build_py
+copying gen3_robot/circle_sender.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+copying gen3_robot/command_sender.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+copying gen3_robot/base_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+copying gen3_robot/__init__.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+copying gen3_robot/gen3_controller.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+copying gen3_robot/gen3_server.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+copying gen3_robot/button_event.py -> /home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/build/lib/gen3_robot
+running install
+running install_lib
+running install_data
+copying package.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot
+copying launch/gen3_robot.launch.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/launch
+copying launch/gen3_server.launch.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/launch
+copying launch/demo_circle.launch.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/launch
+copying config/gen3_controller.yaml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/config
+copying models/realsense_d435i/CHANGELOG.md -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i
+copying models/realsense_d435i/LICENSE -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i
+copying models/realsense_d435i/d435i.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i
+copying models/realsense_d435i/d435i.png -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i
+copying models/realsense_d435i/README.md -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i
+copying models/realsense_d435i/assets/d435i_5.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_8.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_7.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_4.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_2.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_1.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_3.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_6.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/realsense_d435i/assets/d435i_0.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/realsense_d435i/assets
+copying models/kinova_gen3/CHANGELOG.md -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/gen3_gripper_d435i_real.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/gen3.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/gen3_robot.py -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/gen3.png -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/demo.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/LICENSE -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/scene.xml -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/README.md -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3
+copying models/kinova_gen3/assets/d435i_5.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_8.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/spherical_wrist_2_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/forearm_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/shoulder_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/base_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/half_arm_1_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_7.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/bracelet_with_vision_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_4.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_2.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/spherical_wrist_1_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_1.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_3.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/bracelet_no_vision_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/half_arm_2_link.stl -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_6.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/assets/d435i_0.obj -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/assets
+copying models/kinova_gen3/__pycache__/base_controller.cpython-310.pyc -> /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/share/gen3_robot/models/kinova_gen3/__pycache__
+running install_egg_info
+removing '/home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/gen3_robot/gen3_robot.egg-info to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/python3.10/site-packages/gen3_robot-0.0.0-py3.10.egg-info
+running install_scripts
+Installing button_event script to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/gen3_robot
+Installing circle_sender script to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/gen3_robot
+Installing command_sender script to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/gen3_robot
+Installing gen3_server script to /home/jack/Desktop/mujoco/mujoco_demo/install/gen3_robot/lib/gen3_robot
+writing list of installed files to '/home/jack/Desktop/mujoco/mujoco_demo/build/gen3_robot/install.log'

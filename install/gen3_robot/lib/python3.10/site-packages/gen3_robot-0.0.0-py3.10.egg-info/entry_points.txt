@@ -1,4 +1,5 @@
 [console_scripts]
+button_event = gen3_robot.button_event:main
 circle_sender = gen3_robot.circle_sender:main
 command_sender = gen3_robot.command_sender:main
 gen3_server = gen3_robot.gen3_server:main

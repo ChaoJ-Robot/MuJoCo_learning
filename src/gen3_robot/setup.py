@@ -35,6 +35,7 @@ setup(
             'gen3_server = gen3_robot.gen3_server:main',
             'command_sender = gen3_robot.command_sender:main',
             'circle_sender = gen3_robot.circle_sender:main',
+            'button_event = gen3_robot.button_event:main',
         ],
     },
 )

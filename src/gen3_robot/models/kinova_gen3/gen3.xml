@@ -3,6 +3,11 @@
 
   <option integrator="implicitfast"/>
 
+  <visual>
+    <headlight diffuse="0.8 0.8 0.8" ambient="0.3 0.3 0.3" specular="0.2 0.2 0.2"/>
+    <rgba haze="0.75 0.85 1.0 1"/>
+  </visual>
+
   <default>
     <default class="visual">
       <geom type="mesh" contype="0" conaffinity="0" group="2" rgba="0.75294 0.75294 0.75294 1"/>
@@ -20,6 +25,11 @@
   </default>
 
   <asset>
+    <!-- Sky and ground -->
+    <texture name="skybox" type="skybox" builtin="gradient" rgb1="0.20 0.45 0.95" rgb2="0.75 0.90 1.00" width="512" height="3072"/>
+    <texture name="ground_checker" type="2d" builtin="checker" rgb1="0.08 0.08 0.08" rgb2="0.92 0.92 0.92" width="512" height="512" mark="edge" markrgb="0.25 0.25 0.25"/>
+    <material name="ground_mat" texture="ground_checker" texrepeat="8 8" texuniform="true" reflectance="0.05"/>
+
     <mesh name="base_link" file="base_link.stl"/>
     <mesh name="shoulder_link" file="shoulder_link.stl"/>
     <mesh name="half_arm_1_link" file="half_arm_1_link.stl"/>
@@ -31,6 +41,32 @@
   </asset>
 
   <worldbody>
+    <!-- Environment -->
+    <light name="sun" pos="0 0 3.0" dir="0 0 -1" directional="true" diffuse="0.95 0.95 0.95" specular="0.2 0.2 0.2"/>
+    <geom name="ground" type="plane" pos="0 0 0" size="3 3 0.1" material="ground_mat" friction="1.0 0.1 0.1"/>
+
+    <!-- A few blocks near the robot -->
+    <body name="block_red" pos="0.42 -0.12 0.03">
+      <freejoint/>
+      <geom name="block_red_geom" type="box" size="0.03 0.03 0.03" rgba="0.95 0.15 0.15 1" mass="0.12" friction="1.0 0.02 0.002"/>
+    </body>
+
+    <body name="block_green" pos="0.50 0.02 0.025">
+      <freejoint/>
+      <geom name="block_green_geom" type="box" size="0.025 0.025 0.025" rgba="0.15 0.85 0.20 1" mass="0.10" friction="1.0 0.02 0.002"/>
+    </body>
+
+    <body name="block_blue" pos="0.58 0.15 0.02">
+      <freejoint/>
+      <geom name="block_blue_geom" type="box" size="0.02 0.02 0.02" rgba="0.15 0.35 0.95 1" mass="0.08" friction="1.0 0.02 0.002"/>
+    </body>
+
+    <body name="block_yellow" pos="0.35 0.10 0.0225">
+      <freejoint/>
+      <geom name="block_yellow_geom" type="box" size="0.0225 0.0225 0.0225" rgba="0.95 0.85 0.10 1" mass="0.09" friction="1.0 0.02 0.002"/>
+    </body>
+
+    <!-- Original Gen3 robot -->
     <body name="base_link">
       <inertial pos="-0.000648 -0.000166 0.084487" quat="0.999294 0.00139618 -0.0118387 0.035636" mass="1.697"
         diaginertia="0.00462407 0.00449437 0.00207755"/>

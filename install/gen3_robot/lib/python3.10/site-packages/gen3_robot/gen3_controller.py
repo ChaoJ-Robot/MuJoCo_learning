@@ -43,6 +43,8 @@ class Gen3MujocoController(BaseController):
         self.lock = threading.Lock()
         self.viewer = None
 
+        self.renderer = mujoco.Renderer(self.model, height=480, width=640)
+
         self.set_up()
 
     def set_up(self, **kwargs: Any) -> None:
@@ -56,7 +58,31 @@ class Gen3MujocoController(BaseController):
 
     def reset(self):
         self.set_up()
+    
 
+    def render_camera(self, camera_name="wrist"):
+        with self.lock:
+            # RGB
+            self.renderer.disable_depth_rendering()
+            self.renderer.update_scene(self.data, camera=camera_name)
+            rgb = self.renderer.render().copy()
+
+            # Depth
+            self.renderer.enable_depth_rendering()
+            self.renderer.update_scene(self.data, camera=camera_name)
+            depth = self.renderer.render().copy()
+            self.renderer.disable_depth_rendering()
+
+        return rgb, depth
+    
+    def close_renderer(self):
+        if hasattr(self, "renderer") and self.renderer is not None:
+            try:
+                self.renderer.close()
+            except Exception:
+                pass
+            self.renderer = None
+    
     def get_state(self) -> Dict[str, Any]:
         with self.lock:
             ee_pos = self.data.site_xpos[self.site_id].copy()
@@ -72,7 +98,7 @@ class Gen3MujocoController(BaseController):
 
     def get_eef_state(self):
         state = self.get_state()
-        print(f"当前末端位置: {state['ee_pos']}, {state['ee_rot']}")
+        # print(f"当前末端位置: {state['ee_pos']}, {state['ee_rot']}")
         return state["ee_pos"], state["ee_rot"]
 
     def set_action(self, action, **kwargs: Any) -> None:

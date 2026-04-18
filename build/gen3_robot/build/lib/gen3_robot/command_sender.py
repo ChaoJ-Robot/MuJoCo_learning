@@ -47,7 +47,7 @@ class CommandSender(Node):
             self.get_logger().info(f"已发送末端目标: ({self.x}, {self.y}, {self.z})")
 
         self.sent = True
-
+    
 
 def main(args=None):
     rclpy.init(args=args)

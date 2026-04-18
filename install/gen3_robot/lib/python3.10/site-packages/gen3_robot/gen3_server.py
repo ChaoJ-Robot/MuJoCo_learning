@@ -9,8 +9,9 @@ from rclpy.node import Node
 
 from ament_index_python.packages import get_package_share_directory
 from geometry_msgs.msg import PoseStamped, Point, Quaternion
-from sensor_msgs.msg import JointState
+from sensor_msgs.msg import JointState , Image
 from std_msgs.msg import Float64MultiArray, String
+
 
 from .gen3_controller import Gen3MujocoController
 
@@ -68,6 +69,13 @@ class Gen3Server(Node):
 
         self.controller = Gen3MujocoController(model_xml_path, site_name)
 
+        self.ee_target = None
+        self.joint_target = None
+        self.control_mode = "idle"  # "idle", "ee", "joint"
+
+        self.color_pub = self.create_publisher(Image, "/camera/color/image_raw", 10)
+        self.depth_pub = self.create_publisher(Image, "/camera/depth/image_raw", 10)
+                
         if self.enable_viewer:
             self.controller.launch_viewer()
 
@@ -94,6 +102,43 @@ class Gen3Server(Node):
                 self.get_logger().warn("joint_target 长度必须为7")
         except Exception as e:
             self.get_logger().error(f"joint_target 失败: {e}")
+
+    def numpy_to_image_msg(self, array, encoding, frame_id):
+        msg = Image()
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.header.frame_id = frame_id
+
+        if not array.flags["C_CONTIGUOUS"]:
+            array = np.ascontiguousarray(array)
+
+        msg.height = array.shape[0]
+        msg.width = array.shape[1]
+        msg.encoding = encoding
+        msg.is_bigendian = False
+        msg.step = array.strides[0]
+        msg.data = array.tobytes()
+
+        return msg
+    
+    def publish_camera_images(self):
+        rgb, depth = self.controller.render_camera("wrist")
+
+        # MuJoCo 渲染图通常上下翻转
+        rgb = np.flipud(rgb)
+        depth = np.flipud(depth)
+
+        # RGB: uint8, HxWx3
+        if rgb.dtype != np.uint8:
+            rgb = rgb.astype(np.uint8)
+
+        rgb_msg = self.numpy_to_image_msg(rgb, "rgb8", "wrist")
+        self.color_pub.publish(rgb_msg)
+
+        # Depth: float32, HxW
+        depth = depth.astype(np.float32)
+        depth_msg = self.numpy_to_image_msg(depth, "32FC1", "wrist")
+        depth_msg.header.stamp = rgb_msg.header.stamp
+        self.depth_pub.publish(depth_msg)
 
     def ee_pose_target_callback(self, msg):
         try:
@@ -165,7 +210,8 @@ class Gen3Server(Node):
             self.controller.step()
             self.publish_joint_state()
             self.publish_ee_pose()
-
+            self.publish_camera_images()
+            
             if self.enable_viewer:
                 self.controller.sync_viewer()
 
